@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Optional local icon override (e.g. TIDAL's logo, which is TIDAL's trademark): keep it local.
+# The project's own icon lives in assets/.
+/tidaloid.ico
+
+# Build output
+build/
+dist/
+.venv-build/
+
+# Leftovers from downloads and previews
+*.part
+*.dec
+*.ts.part
+tidal-preview-*.m4a
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

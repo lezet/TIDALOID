@@ -1,4 +1,4 @@
- TIDALOID
+# TIDALOID
 
 A modern GUI successor to [yaronzz/Tidal-Media-Downloader](https://github.com/yaronzz/Tidal-Media-Downloader) (tidal-dl), whose own client keys TIDAL no longer accepts.
 
@@ -9,7 +9,7 @@ A Windows desktop app for searching TIDAL, previewing tracks, and saving music f
 ## Features
 
 - **Search** tracks, albums, artists, playlists, and videos, with cover thumbnails and a large cover preview.
-- **Preview** a track before you download it. Use the seek slider, ±10 s buttons, Space to play or stop, and ←/→ to skip.
+- **Preview** a track before you download it. Use the seek slider, Â±10 s buttons, Space to play or stop, and â†/â†’ to skip.
 - **Download** tracks, whole albums, playlists, mixes, artists, and music videos, by search or by pasting TIDAL links.
 - **Quality**: AAC 96/320 kbps, FLAC 16-bit, or FLAC Hi-Res (FLAC needs a TIDAL plan that includes lossless).
 - **Fast**: segments and tracks download in parallel.
@@ -29,17 +29,40 @@ A Windows desktop app for searching TIDAL, previewing tracks, and saving music f
 
   TIDALOID finds the winget install automatically, so FFmpeg doesn't need to be on `PATH`.
 
-## Setup
+## Download
+
+Grab `TIDALOID-vX.Y.Z-windows-x64.exe` from [Releases](../../releases/latest). It's a single file with nothing to install. Install FFmpeg too (see below).
+
+The exe isn't code-signed, so Windows SmartScreen may warn the first time you run it. Click **More info â†’ Run anyway**.
+
+## Run from source
 
 ```
-git clone https://github.com/<you>/TIDALOID.git
+git clone https://github.com/lezet/TIDALOID.git
 cd TIDALOID
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\pythonw tidaloid.pyw
 ```
 
-To get a Desktop shortcut, point one at `.venv\Scripts\pythonw.exe` with `tidaloid.pyw` as the argument. If a `tidaloid.ico` file sits next to the script, it's used as the window and taskbar icon.
+To get a Desktop shortcut, point one at `.venv\Scripts\pythonw.exe` with `tidaloid.pyw` as the argument. If you put your own `tidaloid.ico` next to the script or exe, it replaces the built-in window and taskbar icon.
+
+## Building the exe
+
+```
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+This creates `.venv-build`, installs PyInstaller, and writes `dist\TIDALOID.exe` (about 21 MB, no console window).
+
+**Releases are automated.** Pushing a version tag makes the [Release workflow](.github/workflows/release.yml) build the exe on GitHub and publish it as a release:
+
+```
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Keep `__version__` in `tidaloid.pyw` in step with the tag. You can regenerate the app icon with `python tools/make_icon.py`.
 
 ## Signing in
 
